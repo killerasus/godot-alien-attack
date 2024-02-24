@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj14qo0a8ek2h"]
+
+[ext_resource type="Script" path="res://scripts/deathzone.gd" id="1_2qxgw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8law"]
+size = Vector2(126, 726)
+
+[node name="Deathzone" type="Area2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_2qxgw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-169, 361)
+shape = SubResource("RectangleShape2D_v8law")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

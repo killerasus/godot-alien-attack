@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhj22fyfowsa7"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_anwss"]
+[ext_resource type="Texture2D" uid="uid://dr1j8qx843ayc" path="res://assets/textures/bg.png" id="1_p6iq6"]
+[ext_resource type="PackedScene" uid="uid://c62u3q4teexqf" path="res://scenes/player.tscn" id="2_dtv42"]
+[ext_resource type="PackedScene" uid="uid://ccno8fqqihsty" path="res://scenes/enemy_spawner.tscn" id="4_2be5d"]
+[ext_resource type="PackedScene" uid="uid://bj14qo0a8ek2h" path="res://scenes/deathzone.tscn" id="4_euhq7"]
+[ext_resource type="PackedScene" uid="uid://d4fvwloq8ym6t" path="res://scenes/hud.tscn" id="6_6yrcv"]
+[ext_resource type="AudioStream" uid="uid://c3t1der3cm8x7" path="res://assets/audio/hit.wav" id="7_3vj0h"]
+[ext_resource type="AudioStream" uid="uid://wacwgykn4uae" path="res://assets/audio/explode.wav" id="8_sogw7"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_anwss")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_p6iq6")
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("2_dtv42")]
+position = Vector2(70, 360)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("4_2be5d")]
+
+[node name="Deathzone" parent="." instance=ExtResource("4_euhq7")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UI" instance=ExtResource("6_6yrcv")]
+
+[node name="EnemyHitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_3vj0h")
+
+[node name="PlayerTakeDamageSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_sogw7")
+
+[connection signal="took_damage" from="Player" to="." method="_on_player_took_damage"]
+[connection signal="enemy_spawned" from="EnemySpawner" to="." method="_on_enemy_spawner_enemy_spawned"]
