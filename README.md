@@ -1,2 +1,3 @@
-# godot-alien-attack
-Alien Attack game in GDScript from the GameDev.tv Godot 2D games course.
+# Godot Alien Attack
+
+Alien Attack game in GDScript from the [GameDev.tv](https://www.gamedev.tv) Godot 2D games course.
